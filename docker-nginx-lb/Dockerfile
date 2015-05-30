@@ -9,7 +9,7 @@ WORKDIR /usr/local/bin
 
 # please note version number 
 RUN cd /usr/local/bin && \
-    curl -fsSL https://github.com/kelseyhightower/confd/releases/download/v0.9.0/confd-0.9.0-linux-amd64 confd && \
+    curl -fsSL https://github.com/kelseyhightower/confd/releases/download/v0.9.0/confd-0.9.0-linux-amd64 -o confd && \
     chmod a+x confd
 RUN mkdir -p /etc/confd/{conf.d,templates}
 ADD /nginx.toml /etc/confd/conf.d/nginx.toml
