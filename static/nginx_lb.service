@@ -27,3 +27,10 @@ ExecStartPre=-/usr/bin/docker rm nginx_lb
 ExecStartPre=/usr/bin/docker pull jaren/nginx_lb
 ExecStart=/usr/bin/docker run --name nginx_lb -p ${COREOS_PUBLIC_IPV4}:80:80 \
 jaren/nginx_lb /usr/local/bin/confd-watch
+
+# Stop
+ExecStop=/usr/bin/docker stop nginx_lb
+
+[X-Fleet]
+Conflicts=nginx.service
+Conflicts=apache@*.service
