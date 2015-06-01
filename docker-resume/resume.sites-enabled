@@ -1,0 +1,16 @@
+server {
+        listen 0.0.0.0:80;
+	# TODO should have server_name in ETCD too 
+        server_name .resume.jarenglover.com;
+        access_log /var/log/resume-nginx-access.log;
+        error_log /var/log/resume-nginx-error.log;
+   
+	#TODO location of resume could be ETCD too 
+        root /docs/resume/latest/;
+        index Jaren_Glover.pdf;
+    
+
+        location / { 
+                try_files $uri/ =404;
+        }   
+}
