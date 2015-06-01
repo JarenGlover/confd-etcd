@@ -28,10 +28,10 @@ ExecStartPre=-/usr/bin/docker kill resume-nginx.%i
 ExecStartPre=-/usr/bin/docker rm resume-nginx.%i
 ExecStartPre=/usr/bin/docker pull jaren/resume-nginx
 ExecStart=/usr/bin/docker run --name resume-nginx.%i -p ${COREOS_PRIVATE_IPV4}:%i:80 \
-jaren/resume-nginx /usr/sbin/nginx -D FOREGROUND
+jaren/resume-nginx /usr/sbin/nginx
 
 # Stop
-ExecStop=/usr/sbin/docker stop resume-nginx.%i
+ExecStop=/usr/bin/docker stop resume-nginx.%i
 
 [X-Fleet]
 # Don't schedule on the same machine as other Apache instances
