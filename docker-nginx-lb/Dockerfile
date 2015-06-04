@@ -11,9 +11,16 @@ WORKDIR /usr/local/bin
 RUN cd /usr/local/bin && \
     curl -fsSL https://github.com/kelseyhightower/confd/releases/download/v0.9.0/confd-0.9.0-linux-amd64 -o confd && \
     chmod a+x confd
+# make confd folder
+
 RUN mkdir -p /etc/confd/{conf.d,templates}
+
+# add nginx and subdomain toml and tmpl file 
 ADD /nginx.toml /etc/confd/conf.d/nginx.toml
 ADD /nginx.tmpl /etc/confd/templates/nginx.tmpl
+
+ADD /subdomain.tmpl /etc/confd/templates/subdomain.tmpl
+ADD /subdomain.toml /etc/confd/conf.d/subdomain.toml
 
 # nginx tuning
 
