@@ -7,7 +7,7 @@ RUN apt-get install -qy git nginx
 
 RUN mkdir -p /docs
 
-RUN cd /docs && git clone https://github.com/GloveDotCom/resume.git
+RUN cd /docs && git clone https://github.com/JarenGlover/resume.git
 
 # Remove the default Nginx configuration file
 RUN rm /etc/nginx/sites-enabled/default
