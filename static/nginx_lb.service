@@ -34,4 +34,4 @@ ExecStop=/usr/bin/docker stop nginx_lb
 [X-Fleet]
 Conflicts=nginx.service
 Conflicts=apache@*.service
-MachineMetadata="app_level=frontend"
+MachineMetadata="frontend=true"

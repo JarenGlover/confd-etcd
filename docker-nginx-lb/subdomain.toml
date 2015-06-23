@@ -2,16 +2,19 @@
 
 # The name of the template that will be used to render the application's configuration file
 # Confd will look in `/etc/confd/templates` for these files by default
-src = "subdomain.tmpl"
+src = "jenkins.tmpl"
 
 # The location to place the rendered configuration file
-dest = "/etc/nginx/sites-enabled/subdomain.conf"
+dest = "/etc/nginx/sites-enabled/jenkins.conf"
+
+# A part of the etcd hierarchy that comes before the keys in the keys directive.
+prefix = "/jenkins" 
 
 # The etcd keys or directory to watch.  This is where the information to fill in
 # the template will come from.
 keys = [
-  "/services/resume",
-  "/subdomains/resume",
+  "/services",
+  "/upstream",
 ]
 
 # File ownership and mode information

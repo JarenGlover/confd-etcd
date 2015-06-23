@@ -21,20 +21,21 @@ ExecStart=/bin/bash -c '\
   while true; do \
           curl -f ${COREOS_PRIVATE_IPV4}:%i; \
               if [ $? -eq 0 ]; then \
-                etcdctl set /services/jenkins/${COREOS_PRIVATE_IPV4} \'${COREOS_PRIVATE_IPV4}:%i\' --ttl 30; \
-                etcdctl set /subdomains/jenkins \'jenkins\' --ttl 30; \
+                etcdctl set /jenkins/upstream/${COREOS_PRIVATE_IPV4} \'${COREOS_PRIVATE_IPV4}:%i\' --ttl 30; \
+                etcdctl set /jenkins/subdomain/ \'jenkins\' --ttl 30; \
               else \
-                etcdctl rm /services/jenkins/${COREOS_PRIVATE_IPV4}; \
-                etcdctl rm /subdomains/jenkins; \
+                etcdctl rm /jenkins/upstream/${COREOS_PRIVATE_IPV4}; \
+                etcdctl rm /jenkins/subdomain/; \
               fi; \
               sleep 20; \
               done'
 
 # Stop
-ExecStop=/usr/bin/etcdctl rm /services/jenkins/${COREOS_PRIVATE_IPV4}
+ExecStop=/usr/bin/etcdctl rm /jenkins/upstream/${COREOS_PRIVATE_IPV4}
+ExecStop=/usr/bin/etcdctl rm /jenkins/subdomain/
 
 [X-Fleet]
-# Schedule on the same machine as the associated Apache service
+# Schedule info
 MachineOf=jenkins@%i.service
 Conflicts=nginx_lb.service
-MachineMetadata="app_level=jenkins"
+MachineMetadata="jenkins=true"

@@ -1,16 +1,21 @@
-upstream {{getv "/subdomains/resume"}} {
-{{range getvs "/services/resume/*"}}
+upstream {{getv "/subdomain"}} {
+{{range getvs "/upstream/*"}}
     server {{.}};
 {{end}}
 }
 
 server {
-    server_name  {{getv "/subdomains/resume"}}.jarenglover.com;
+    #listen 80 default_server;
+    #listen [::]:8080 default_server ipv6only=on;
+
+    server_name  {{getv "/subdomain"}}.jarenglover.com;	
+    access_log /var/log/nginx/access.log upstreamlog;
+
     location / {
-        proxy_pass        http://{{getv "/subdomains/resume"}};
-        proxy_redirect    off;
-        proxy_set_header  Host             $host;
-        proxy_set_header  X-Real-IP        $remote_addr;
-        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
-   }
+        proxy_pass http://{{getv "/subdomain"}};
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
 }

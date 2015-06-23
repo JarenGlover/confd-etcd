@@ -37,6 +37,6 @@ ExecStop=/usr/bin/docker stop jenkins.%i$
 ExecStop=/usr/bin/docker stop jenkins-dv
 
 [X-Fleet]
-# Don't schedule on the same machine as other Apache instances
+# Schedule info
 Conflicts=nginx_lb.service
-MachineMetadata="app_level=jenkins"
+MachineMetadata="jenkins=true"
