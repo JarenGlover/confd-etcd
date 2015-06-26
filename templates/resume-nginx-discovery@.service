@@ -1,5 +1,6 @@
 [Unit]
-Description=nginx web server on port %i etcd registration
+
+Description=resume service on port %i etcd registration
 
 # Requirements
 Requires=etcd.service
@@ -21,17 +22,18 @@ ExecStart=/bin/bash -c '\
   while true; do \
           curl -f ${COREOS_PRIVATE_IPV4}:%i; \
               if [ $? -eq 0 ]; then \
-                etcdctl set /services/resume/${COREOS_PRIVATE_IPV4} \'${COREOS_PRIVATE_IPV4}:%i\' --ttl 30; \
-		etcdctl set /subdomains/resume \'resume\' --ttl 30; \
+                etcdctl set /resume/upstream/${COREOS_PRIVATE_IPV4} \'${COREOS_PRIVATE_IPV4}:%i\' --ttl 30; \
+		etcdctl set /resume/subdomain/ \'resume\' --ttl 30; \
               else \
-                etcdctl rm /services/resume/${COREOS_PRIVATE_IPV4}; \
-		etcdctl rm /subdomains/resume; \
+                etcdctl rm /resume/upstream/${COREOS_PRIVATE_IPV4}; \
+		etcdctl rm /resume/subdomain/; \
               fi; \
               sleep 20; \
               done'
 
 # Stop
 ExecStop=/usr/bin/etcdctl rm /services/resume/${COREOS_PRIVATE_IPV4}
+ExecStop=/usr/bin/etcdctl rm /services/subdomain/
 
 [X-Fleet]
 # Schedule on the same machine as the associated Apache service

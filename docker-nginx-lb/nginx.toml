@@ -7,10 +7,14 @@ src = "nginx.tmpl"
 # The location to place the rendered configuration file
 dest = "/etc/nginx/sites-enabled/app.conf"
 
+# A part of the etcd hierarchy that comes before the keys in the keys directive.
+prefix ="/resume"
+
 # The etcd keys or directory to watch.  This is where the information to fill in
 # the template will come from.
 keys = [
-  "/services/apache",
+  "/subdomain",
+  "/upstream",
 ]
 
 # File ownership and mode information
