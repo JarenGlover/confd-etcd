@@ -1,5 +1,5 @@
 upstream apache_pool {
-{{ range getvs "/services/*" }}
+{{ range getvs "/upstream/*" }}
     server {{ . }};
 {{ end }}
 }
