@@ -2,4 +2,9 @@
 
 *.swp
 *.swo
+
+#virtual env
 venv
+
+#os x garbs
+.idea/
