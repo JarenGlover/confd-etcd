@@ -21,7 +21,7 @@ server {
                 try_files $uri/ =404;
         }
 
-        location /upgrade
+        location /update
         {
             # requests to the API will be proxy_pass to the backend API infra
             # read this -> http://en.wikipedia.org/wiki/X-Forwarded-For
