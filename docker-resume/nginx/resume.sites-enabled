@@ -6,8 +6,7 @@ server {
         listen 0.0.0.0:80;
     	# TODO should have server_name in ETCD too
 
-        # server_name .resume.jarenglover.com;
-        server_name _;
+        server_name .update.jarenglover.com;
 
         access_log /var/log/resume-nginx-access.log;
         error_log /var/log/resume-nginx-error.log;
@@ -18,7 +17,7 @@ server {
     
 
         location / { 
-                try_files $uri/ =404;
+                try_files $uri $uri/ =404;
         }
 
         location /update
