@@ -30,8 +30,8 @@ RUN pip install -r /docs/resume/requirements.txt
 # expose ports
 EXPOSE 80
 
-# start nginx in background
-RUN nginx&
+ENTRYPOINT ["supervisord","-c","/etc/supervisor.conf"]
 
-# start resume webservice on port 4000
-ENTRYPOINT ["gunicorn","-w","4","-b","0.0.0.0:4000", "resume:app", "--chdir","/docs/resume/"]
+#ENTRYPOINT ["gunicorn","-w","4","-b","0.0.0.0:4000", "resume:app", "--chdir","/docs/resume/"]
+
+#gunicorn -w 4 -b 0.0.0.0:4000 resume:app --chdir /docs/resume && nginx
