@@ -33,5 +33,4 @@ EXPOSE 80
 ENTRYPOINT ["supervisord","-c","/etc/supervisor.conf"]
 
 #ENTRYPOINT ["gunicorn","-w","4","-b","0.0.0.0:4000", "resume:app", "--chdir","/docs/resume/"]
-
 #gunicorn -w 4 -b 0.0.0.0:4000 resume:app --chdir /docs/resume && nginx
