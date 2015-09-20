@@ -10,7 +10,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY nginx/resume.sites-enabled /etc/nginx/conf.d/resume.sites-enabled.conf
 
-COPY supervisor/supervisor.conf /etc/.
+COPY supervisor/supervisor.conf /etc/supervisor.conf
 
 RUN apk update && apk add \
         git \
